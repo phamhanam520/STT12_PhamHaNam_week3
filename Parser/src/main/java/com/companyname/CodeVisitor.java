@@ -7,13 +7,14 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import java.util.List;
 
 public class CodeVisitor extends VoidVisitorAdapter<List<String>> {
+
     @Override
     public void visit(ClassOrInterfaceDeclaration cls, List<String> report) {
         // Các package trong dự án phải theo mẫu: com.companyname.* (*:tên bất kỳ)
         if (!cls.getFullyQualifiedName().get().startsWith("com.companyname")) {
-            System.out.println("pakage:" + cls.getFullyQualifiedName().get());
-            report.add("Package name does not follow naming convention: com.companyname.*" + cls.getFullyQualifiedName().get());
+            report.add("Package name does not follow naming convention com.companyname.*: " + cls.getFullyQualifiedName().get());
         }
+
 
         // Các class phải có tên là một danh từ hoặc cụm danh ngữ và phải bắt đầu bằng chữ hoa.
         if (!cls.getNameAsString().matches("[A-Z][a-zA-Z]*")) {
@@ -49,6 +50,17 @@ public class CodeVisitor extends VoidVisitorAdapter<List<String>> {
                 });
             });
         }
+        // nếu không phải là interface thì không được chứa hằng số
+        if(!cls.isInterface()){
+            cls.getFields().forEach(field -> {
+                field.getVariables().forEach(variable -> {
+                    if (variable.getNameAsString().matches("[A-Z][A-Z_]*")) {
+                        report.add("Class " + cls.getNameAsString() + " contains constant");
+                    }
+                });
+            });
+        }
+
         //Tên method phải bắt đầu bằng một động từ và phải là chữ thường
         cls.getMethods().forEach(method -> {
             if (!method.getNameAsString().matches("[a-z][a-zA-Z]*")) {

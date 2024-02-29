@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final String PROJECT_PATH = "C:\\Users\\phgss\\OneDrive\\Máy tính\\Kien truc\\workspace\\tuan 3\\CheckProject";
+    private static final String PROJECT_PATH = "C:\\Users\\phgss\\OneDrive\\Máy tính\\Kien truc\\workspace\\STT12_PhamHaNam_week3\\CheckProject";
     public static void main(String[] args) {
         List<String> report = new ArrayList<>();
         JavaParser javaParser = new JavaParser();

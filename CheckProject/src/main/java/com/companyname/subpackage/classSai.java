@@ -1,17 +1,19 @@
-package com.companyname.subpackage;
+package com.company.subpackage;
 
 public class classSai {
-    private int myField;
+    private int FieldSai;
+    // constant
+    private static final int CONSTANT_WRONG = 0;
 
-    public MyClass(int myField) {
-        this.myField = myField;
+    public classSai(int myField) {
+        this.FieldSai = myField;
     }
 
-    public int GetMyField() {
-        return myField;
+    public int getFieldSai() {
+        return FieldSai;
     }
 
-    public void setMyField(int myField) {
-        this.myField = myField;
+    public void setFieldSai(int myField) {
+        this.FieldSai = myField;
     }
 }
